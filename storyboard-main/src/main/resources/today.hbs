@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+   <head><title>Today - {{userName}}</title></head>
+   <body>
+      Welcome {{userName}}
+      <ul>
+          {{#stories}}
+             <li id="story-title-{{id}}">{{title}}</li>
+          {{/stories}}
+      </ul>
+   </body>
+</html>
