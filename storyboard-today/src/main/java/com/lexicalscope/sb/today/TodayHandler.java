@@ -17,7 +17,11 @@ public class TodayHandler implements Handler {
    private final TodayView view;
    private final SbLogger logger;
 
-   public TodayHandler(final SbLogger logger, final StoryDatabase db, final Theme theme, final TodayView view) {
+   public TodayHandler(
+         final SbLogger logger,
+         final StoryDatabase db,
+         final Theme theme,
+         final TodayView view) {
       this.logger = logger;
       this.db = db;
       this.theme = theme;
@@ -29,14 +33,10 @@ public class TodayHandler implements Handler {
       logger.debug("viewing user %s", userId);
 
       final User user = db.userData().findUserById(userId);
-      final Stories stories = db.todayData().storyFor(userId);
-
       final TodayTemplate todayTemplate = theme.todayTemplate();
       todayTemplate.userName(user.name());
 
-      for (final Story story : stories) {
-         view.storySummaryView(story).outputTo(theme, todayTemplate);
-      }
+      view.outputTo(db.todayData().storyFor(userId), theme, todayTemplate);
 
       response.content(200, todayTemplate);
    }

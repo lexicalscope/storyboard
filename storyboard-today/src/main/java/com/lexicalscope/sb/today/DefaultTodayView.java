@@ -1,5 +1,6 @@
 package com.lexicalscope.sb.today;
 
+import com.lexicalscope.sb.data.Stories;
 import com.lexicalscope.sb.data.Story;
 import com.lexicalscope.sb.logging.SbLogger;
 
@@ -10,11 +11,17 @@ public class DefaultTodayView implements TodayView {
       this.logger = logger;
    }
 
-   @Override public StorySummaryView storySummaryView(final Story story) {
+   private StorySummaryView storySummaryView(final Story story) {
       return new HideIrrelevantStories(story,
             new DefaultStorySummaryView(logger, story,
                   new CompositeStorySummaryPartialView(
                         new StorySummaryMainView(story),
                         new StorySummaryBadgeView(story))));
+   }
+
+   @Override public void outputTo(final Stories stories, final Theme theme, final TodayTemplate todayTemplate) {
+      for (final Story story : stories) {
+         storySummaryView(story).outputTo(theme, todayTemplate);
+      }
    }
 }
