@@ -1,5 +1,47 @@
 group TestDao;
 
+createStoryTable() ::= <<
+   create table story (
+      id identity primary key, 
+      title varchar(100), 
+      summary varchar(200), 
+      author BIGINT, 
+      foreign key (author) references user(id))
+>>
+
+createUpvoteTable() ::= <<
+   create table upvote (
+      story bigint, 
+      user bigint, 
+      foreign key (user) references user(id), 
+      foreign key (story) references story(id), 
+      primary key (user, story))
+>>
+
+insert() ::= <<
+   insert into story 
+      (title, summary, author) values (:title, :summary, :authorId)
+>>
+
+relevance() ::= <<
+   merge into relevance 
+      (user, story, score) values (:user, :story, :score)
+>>
+
+upvote() ::= <<
+   merge into upvote (story, user) values (:story, :user)
+>>
+
+createRelevanceTable() ::= <<
+   create table relevance (
+      user bigint, 
+      story bigint, 
+      score int, 
+      foreign key (user) references user(id), 
+      foreign key (story) references story(id), 
+      primary key (user, story))
+>>
+
 storyFor() ::= <<
    select <_storyColumns()>,score from story
    <_joinRelevance()>

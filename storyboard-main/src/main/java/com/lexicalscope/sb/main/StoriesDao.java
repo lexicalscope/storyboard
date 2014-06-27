@@ -15,16 +15,16 @@ import com.lexicalscope.sb.values.data.Relevance;
 
 @UseStringTemplate3StatementLocator("/stories.sql.stg")
 public interface StoriesDao extends TodayData {
-   @SqlUpdate("create table story (id identity primary key, title varchar(100), summary varchar(200), author BIGINT, foreign key (author) references user(id))")
+   @SqlUpdate
    void createStoryTable();
 
-   @SqlUpdate("create table relevance (user bigint, story bigint, score int, foreign key (user) references user(id), foreign key (story) references story(id), primary key (user, story))")
+   @SqlUpdate()
    void createRelevanceTable();
 
-   @SqlUpdate("create table upvote (story bigint, user bigint, foreign key (user) references user(id), foreign key (story) references story(id), primary key (user, story))")
+   @SqlUpdate
    void createUpvoteTable();
 
-   @SqlUpdate("insert into story (title, summary, author) values (:title, :summary, :authorId)")
+   @SqlUpdate
    @GetGeneratedKeys
    long insert(@BindBean Story story);
 
@@ -32,15 +32,15 @@ public interface StoriesDao extends TodayData {
    @SqlQuery
    Stories storyFor(@BindBean UserId userId);
 
-   @SqlQuery()
+   @SqlQuery
    Story story(@Bind("story") long storyId);
 
-   @SqlUpdate("merge into relevance (user, story, score) values (:user, :story, :score)")
+   @SqlUpdate
    void relevance(
          @Bind("user") UserId userId,
          @Bind("story") long storyId,
          @Bind("score") Relevance relevance);
 
-   @SqlUpdate("merge into upvote (story, user) values (:story, :user)")
+   @SqlUpdate
    void upvote(@Bind("story") long storyId, @Bind("user") UserId userId);
 }
