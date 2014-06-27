@@ -5,23 +5,15 @@ import com.lexicalscope.sb.data.Story;
 import com.lexicalscope.sb.logging.SbLogger;
 
 public class DefaultTodayView implements TodayView {
-   private final SbLogger logger;
+   private final TodayViews views;
 
-   public DefaultTodayView(final SbLogger logger) {
-      this.logger = logger;
-   }
-
-   private StorySummaryView storySummaryView(final Story story) {
-      return new HideIrrelevantStories(story,
-            new DefaultStorySummaryView(logger, story,
-                  new CompositeStorySummaryPartialView(
-                        new StorySummaryMainView(story),
-                        new StorySummaryBadgeView(story))));
+   public DefaultTodayView(final TodayViews views) {
+      this.views = views;
    }
 
    @Override public void outputTo(final Stories stories, final Theme theme, final TodayTemplate todayTemplate) {
       for (final Story story : stories) {
-         storySummaryView(story).outputTo(theme, todayTemplate);
+         views.storySummaryView(story, theme, todayTemplate);
       }
    }
 }

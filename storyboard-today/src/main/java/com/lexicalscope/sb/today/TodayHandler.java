@@ -1,8 +1,6 @@
 package com.lexicalscope.sb.today;
 
 
-import com.lexicalscope.sb.data.Stories;
-import com.lexicalscope.sb.data.Story;
 import com.lexicalscope.sb.data.User;
 import com.lexicalscope.sb.data.UserId;
 import com.lexicalscope.sb.database.StoryDatabase;
@@ -14,18 +12,18 @@ import com.lexicalscope.sb.logging.SbLogger;
 public class TodayHandler implements Handler {
    private final StoryDatabase db;
    private final Theme theme;
-   private final TodayView view;
+   private final TodayViews views;
    private final SbLogger logger;
 
    public TodayHandler(
          final SbLogger logger,
          final StoryDatabase db,
          final Theme theme,
-         final TodayView view) {
+         final TodayViews views) {
       this.logger = logger;
       this.db = db;
       this.theme = theme;
-      this.view = view;
+      this.views = views;
    }
 
    @Override public void get(final WebRequest request, final WebResponse response) {
@@ -36,7 +34,7 @@ public class TodayHandler implements Handler {
       final TodayTemplate todayTemplate = theme.todayTemplate();
       todayTemplate.userName(user.name());
 
-      view.outputTo(db.todayData().storyFor(userId), theme, todayTemplate);
+      views.todayView(db.todayData().storyFor(userId), theme, todayTemplate);
 
       response.content(200, todayTemplate);
    }

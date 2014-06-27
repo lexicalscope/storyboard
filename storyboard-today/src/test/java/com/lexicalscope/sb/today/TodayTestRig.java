@@ -17,7 +17,7 @@ public class TodayTestRig {
    }
 
    private void runTodayHandler(final SbLogger logger, final StoryDatabase db, final WebRequest request, final WebResponse response) {
-      new TodayHandler(logger, db, new SimpleTheme(), new DefaultTodayView(logger)).get(request, response);
+      new TodayHandler(logger, db, new SimpleTheme(), new DefaultTodayViews(logger)).get(request, response);
    }
 
    // entry point for test generation
