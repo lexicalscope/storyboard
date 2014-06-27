@@ -91,7 +91,7 @@ import com.lexicalscope.sb.values.user.Name;
       private Title title;
       private Summary summary;
       private Relevance relevance;
-      private UpvoteCount upvoteCount;
+      private UpvoteCount upvoteCount = new UpvoteCount(0);
 
       public StoryBuilder author(final Name name) {
          this.authorName = name;
