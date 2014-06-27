@@ -27,9 +27,9 @@ public class TestTodayHandler {
 
    private UserId userId;
 
-   private final StoryBuilder bobsStory = story().author("Bob Builder").title("Build Things").summary("Build All The Things").relevance(10);
-   private final StoryBuilder carolsStory = story().author("Carol Singer").title("Sing Things").summary("Sing All The Things").relevance(10);
-   private final StoryBuilder davesStory = story().author("Dave Driver").title("Drive Things").summary("Drive All The Things").relevance(10);
+   private final StoryBuilder bobsStory = story().id(1).author("Bob Builder").title("Build Things").summary("Build All The Things").relevance(10);
+   private final StoryBuilder carolsStory = story().id(2).author("Carol Singer").title("Sing Things").summary("Sing All The Things").relevance(10);
+   private final StoryBuilder davesStory = story().id(3).author("Dave Driver").title("Drive Things").summary("Drive All The Things").relevance(10);
    private final Matcher<BeanTodayTemplate> isBobsStory = showsStoryFrom("Bob Builder", titleIs("Build Things"), summaryIs("Build All The Things"), relevance(10));
    private final Matcher<BeanTodayTemplate> isCarolsStory = showsStoryFrom("Carol Singer", titleIs("Sing Things"), summaryIs("Sing All The Things"), relevance(10));
    private final Matcher<BeanTodayTemplate> isDavesStory = showsStoryFrom("Dave Driver", titleIs("Drive Things"), summaryIs("Drive All The Things"), relevance(10));

@@ -1,5 +1,7 @@
 package com.lexicalscope.sb.data;
 
+import java.util.Objects;
+
 import org.hamcrest.FeatureMatcher;
 import org.hamcrest.Matcher;
 
@@ -82,6 +84,32 @@ import com.lexicalscope.sb.values.user.Name;
 
    public static StoryBuilder story() {
       return new StoryBuilder();
+   }
+
+   @Override public int hashCode() {
+      return Objects.hash(
+            id,
+            authorName,
+            authorId,
+            title,
+            summary,
+            relevance,
+            upvoteCount);
+   }
+
+   @Override public boolean equals(final Object obj) {
+      if (obj == null || getClass() != obj.getClass())
+      {
+         return false;
+      }
+      final Story that = (Story) obj;
+      return    this.id == that.id
+             && Objects.equals(this.authorName, that.authorName)
+             && this.authorId == that.authorId
+             && Objects.equals(this.title, that.title)
+             && Objects.equals(this.summary, that.summary)
+             && Objects.equals(this.relevance, that.relevance)
+             && Objects.equals(this.upvoteCount, that.upvoteCount);
    }
 
    public static class StoryBuilder {
