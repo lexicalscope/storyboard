@@ -1,0 +1,24 @@
+group TestDao;
+
+storyFor() ::= <<
+   select <_storyColumns()>,score from story
+   <_joinRelevance()>
+   <_joinAuthorName()>
+   <_joinUpvote()>
+   group by story.id
+>>
+
+story() ::= <<
+   select <_storyColumns()>,0 as score from story
+   <_joinAuthorName()>
+   <_joinUpvote()>
+   where story.id=:story
+   group by story.id
+>>
+
+_storyColumns() ::= << story.id,title,summary,author,authorname, count(upvote.user) as upvotes >>
+_relevanceByUser() ::= << (select story,score from relevance where relevance.user=:id) >>
+_authorNames() ::= << (select id,name as authorname from user) >>
+_joinRelevance() ::= << join <_relevanceByUser()> r on r.story=story.id >>
+_joinAuthorName() ::= << join <_authorNames()> u on story.author=u.id >>
+_joinUpvote() ::= << left join upvote on story.id=upvote.story >>

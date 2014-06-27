@@ -1,18 +1,23 @@
 package com.lexicalscope.sb.data;
 
-import com.lexicalscope.sb.Pure;
+import org.hamcrest.FeatureMatcher;
+import org.hamcrest.Matcher;
+
 import com.lexicalscope.sb.values.data.Relevance;
 import com.lexicalscope.sb.values.data.Summary;
 import com.lexicalscope.sb.values.data.Title;
+import com.lexicalscope.sb.values.data.UpvoteCount;
+import com.lexicalscope.sb.values.data.Value;
 import com.lexicalscope.sb.values.user.Name;
 
-public final class Story {
+@Value public final class Story {
    private final long id;
    private final Name authorName;
    private final Title title;
    private final Summary summary;
    private final Relevance relevance;
    private final long authorId;
+   private final UpvoteCount upvoteCount;
 
    public Story(
          final long id,
@@ -20,49 +25,59 @@ public final class Story {
          final long authorId,
          final Title title,
          final Summary summary,
-         final Relevance relevance) {
+         final Relevance relevance,
+         final UpvoteCount upvoteCount) {
       this.id = id;
       this.authorName = authorName;
       this.authorId = authorId;
       this.title = title;
       this.summary = summary;
       this.relevance = relevance;
+      this.upvoteCount = upvoteCount;
    }
 
    public long id() {
       return id;
    }
 
-   @Pure public Title title() {
+   public Title title() {
       return title;
    }
 
-   @Pure public Title getTitle() {
+   public Title getTitle() {
       return title();
    }
 
-   @Pure public Name author() {
+   public Name author() {
       return authorName;
    }
 
-   @Pure public long authorId() {
+   public long authorId() {
       return authorId;
    }
 
-   @Pure public long getAuthorId() {
+   public long getAuthorId() {
       return authorId();
    }
 
-   @Pure public Summary summary() {
+   public Summary summary() {
       return summary;
    }
 
-   @Pure public Summary getSummary() {
+   public Summary getSummary() {
       return summary();
    }
 
-   @Pure public Relevance relevance() {
+   public Relevance relevance() {
       return relevance;
+   }
+
+   public UpvoteCount upvoteCount() {
+      return upvoteCount;
+   }
+
+   public UpvoteCount getUpvoteCount() {
+      return upvoteCount();
    }
 
    public static StoryBuilder story() {
@@ -76,6 +91,7 @@ public final class Story {
       private Title title;
       private Summary summary;
       private Relevance relevance;
+      private UpvoteCount upvoteCount;
 
       public StoryBuilder author(final Name name) {
          this.authorName = name;
@@ -87,7 +103,7 @@ public final class Story {
       }
 
       public Story build() {
-         return new Story(id, authorName, authorId, title, summary, relevance);
+         return new Story(id, authorName, authorId, title, summary, relevance, upvoteCount);
       }
 
       public StoryBuilder title(final Title title) {
@@ -117,6 +133,15 @@ public final class Story {
          return relevance(new Relevance(relevance));
       }
 
+      public StoryBuilder upvoteCount(final UpvoteCount upvoteCount) {
+         this.upvoteCount = upvoteCount;
+         return this;
+      }
+
+      public StoryBuilder upvoteCount(final int upvoteCount) {
+         return upvoteCount(new UpvoteCount(upvoteCount));
+      }
+
       public StoryBuilder id(final long id) {
          this.id = id;
          return this;
@@ -126,5 +151,29 @@ public final class Story {
          authorId = id;
          return this;
       }
+   }
+
+   public static Matcher<Story> theTitle(final Matcher<? super Title> titleMatcher) {
+      return new FeatureMatcher<Story, Title>(titleMatcher, "title", "title") {
+         @Override protected Title featureValueOf(final Story actual) {
+            return actual.title();
+         }
+      };
+   }
+
+   public static Matcher<Story> theScore(final Matcher<? super Relevance> relevanceMatcher) {
+      return new FeatureMatcher<Story, Relevance>(relevanceMatcher, "relevance", "relevance") {
+         @Override protected Relevance featureValueOf(final Story actual) {
+            return actual.relevance();
+         }
+      };
+   }
+
+   public static Matcher<Story> theUpvotes(final Matcher<? super UpvoteCount> upvoteMatcher) {
+      return new FeatureMatcher<Story, UpvoteCount>(upvoteMatcher, "upvoteCount", "upvoteCount") {
+         @Override protected UpvoteCount featureValueOf(final Story actual) {
+            return actual.upvoteCount();
+         }
+      };
    }
 }

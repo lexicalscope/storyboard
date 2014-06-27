@@ -1,6 +1,8 @@
 package com.lexicalscope.sb.main;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +14,8 @@ import org.eclipse.jetty.server.handler.AbstractHandler;
 import org.h2.jdbcx.JdbcConnectionPool;
 import org.skife.jdbi.v2.DBI;
 
-import com.lexicalscope.sb.dispatch.Controller;
 import com.lexicalscope.sb.app.Main;
+import com.lexicalscope.sb.dispatch.Controller;
 
 public final class InMemoryServer implements AutoCloseable {
    private Server jetty;
@@ -39,10 +41,10 @@ public final class InMemoryServer implements AutoCloseable {
       dbi.registerContainerFactory(new StoryContainerFactory());
       dbi.registerMapper(new StoryMapper());
       dbi.registerMapper(new UserMapper());
-
       users().createUserTable();
       story().createStoryTable();
       story().createRelevanceTable();
+      story().createUpvoteTable();
 
       final SimpleMustacheTheme theme = new SimpleMustacheTheme();
       final Controller controller = new Main().createController(new JdbiDb(dbi), theme);
@@ -71,5 +73,13 @@ public final class InMemoryServer implements AutoCloseable {
    @Override public void close() throws Exception {
       if (jetty != null) { jetty.stop(); }
       if (ds != null) { ds.dispose(); }
+   }
+
+   public void startConsole() {
+      try(Connection connection = ds.getConnection()) {
+         org.h2.tools.Server.startWebServer(connection);
+      } catch (final SQLException e) {
+         throw new RuntimeException(e);
+      }
    }
 }

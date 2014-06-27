@@ -61,16 +61,29 @@ public class TestServerSuite {
    }
 
    public static long insertStory(final Story story) {
-      return server.get().story().insert(story);
+      return stories().insert(story);
    }
 
    public static void setRelevance(final long userId, final long storyId, final int relevance)
    {
-      server.get().story().relevance(new UserId(userId), storyId, new Relevance(relevance));
+      stories().relevance(new UserId(userId), storyId, new Relevance(relevance));
+   }
+
+   public static void upvote(final long storyId, final long userId)
+   {
+      stories().upvote(storyId, new UserId(userId));
+   }
+
+   public static StoriesDao stories() {
+      return server.get().story();
    }
 
    public static long insertStory(final StoryBuilder story) {
       return insertStory(story.build());
+   }
+
+   public static void startConsole() {
+      server.get().startConsole();
    }
 
    public static void dropAll() {

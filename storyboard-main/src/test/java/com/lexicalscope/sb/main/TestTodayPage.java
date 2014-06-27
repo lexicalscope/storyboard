@@ -4,7 +4,6 @@ import static com.lexicalscope.sb.data.Story.story;
 import static com.lexicalscope.sb.main.TestServerSuite.*;
 import static net.sourceforge.jwebunit.junit.JWebUnit.*;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,10 +20,6 @@ public class TestTodayPage extends BaseTestServer {
 
       story = insertStory(story().authorId(user).title("My story").summary("It is a great story."));
       setRelevance(user, story, 14);
-   }
-
-   @After public void cleanup() {
-      dropAll();
    }
 
    @Test public void userNameIsInTitle() {
