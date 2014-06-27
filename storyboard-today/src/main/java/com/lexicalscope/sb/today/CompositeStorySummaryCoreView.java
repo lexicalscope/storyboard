@@ -1,6 +1,5 @@
 package com.lexicalscope.sb.today;
 
-import com.lexicalscope.sb.data.Story;
 
 public class CompositeStorySummaryCoreView implements StorySummaryCoreView {
    private final StorySummaryCoreView delegate0;
@@ -11,8 +10,8 @@ public class CompositeStorySummaryCoreView implements StorySummaryCoreView {
       this.delegate1 = delegate1;
    }
 
-   @Override public void outputTo(final Story story, final Theme theme, final StorySummaryTemplate storyTemplate) {
-      delegate0.outputTo(story, theme, storyTemplate);
-      delegate1.outputTo(story, theme, storyTemplate);
+   @Override public void outputTo(final Theme theme, final StorySummaryTemplate storyTemplate) {
+      delegate0.outputTo(theme, storyTemplate);
+      delegate1.outputTo(theme, storyTemplate);
    }
 }

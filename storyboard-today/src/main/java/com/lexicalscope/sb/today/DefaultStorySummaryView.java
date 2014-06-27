@@ -18,7 +18,7 @@ public class DefaultStorySummaryView implements StorySummaryView {
       logger.debug("viewing story %s", story.id());
 
       final StorySummaryTemplate storyTemplate = theme.storySummaryTemplate();
-      coreView.outputTo(story, theme, storyTemplate);
+      coreView.outputTo(theme, storyTemplate);
       todayTemplate.addStory(storyTemplate);
    }
 }

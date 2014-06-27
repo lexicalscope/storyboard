@@ -14,7 +14,7 @@ public class DefaultTodayView implements TodayView {
       return new HideIrrelevantStories(story,
             new DefaultStorySummaryView(logger, story,
                   new CompositeStorySummaryCoreView(
-                        new DefaultStorySummaryCoreView(),
-                        new StorySummaryBadgeView())));
+                        new DefaultStorySummaryCoreView(story),
+                        new StorySummaryBadgeView(story))));
    }
 }

@@ -19,6 +19,6 @@ public class TestStorySummaryBadgeView {
          oneOf(storyTemplate).showBronzeBadge();
       }});
 
-      new StorySummaryBadgeView().outputTo(story().upvoteCount(5).build(), theme, storyTemplate);
+      new StorySummaryBadgeView(story().upvoteCount(5).build()).outputTo(theme, storyTemplate);
    }
 }
