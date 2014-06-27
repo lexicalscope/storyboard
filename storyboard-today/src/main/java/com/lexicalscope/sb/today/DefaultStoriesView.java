@@ -4,10 +4,10 @@ import com.lexicalscope.sb.data.Stories;
 import com.lexicalscope.sb.data.Story;
 import com.lexicalscope.sb.logging.SbLogger;
 
-public class DefaultTodayView implements TodayView {
+public class DefaultStoriesView implements StoriesView {
    private final TodayViews views;
 
-   public DefaultTodayView(final TodayViews views) {
+   public DefaultStoriesView(final TodayViews views) {
       this.views = views;
    }
 

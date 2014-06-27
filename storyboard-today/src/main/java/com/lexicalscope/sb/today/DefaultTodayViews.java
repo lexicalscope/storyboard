@@ -21,8 +21,8 @@ public class DefaultTodayViews implements TodayViews {
       return view;
    }
 
-   @Override public TodayView todayView(final Stories stories, final Theme theme, final TodayTemplate todayTemplate) {
-      final DefaultTodayView view = new DefaultTodayView(this);
+   @Override public StoriesView todayView(final Stories stories, final Theme theme, final TodayTemplate todayTemplate) {
+      final DefaultStoriesView view = new DefaultStoriesView(this);
       view.outputTo(stories, theme, todayTemplate);
       return view;
    }
