@@ -13,7 +13,7 @@ import com.lexicalscope.sb.data.UserId;
 import com.lexicalscope.sb.values.data.Relevance;
 
 @RunWith(Suite.class)
-@SuiteClasses({ TestTodayPage.class })
+@SuiteClasses({ TestTodayPage.class, TestStoriesDao.class })
 public class TestServerSuite {
    private static ThreadLocal<InMemoryServer> server = new ThreadLocal<InMemoryServer>();
    private static ThreadLocal<Boolean> inSuite = new ThreadLocal<Boolean>(){
