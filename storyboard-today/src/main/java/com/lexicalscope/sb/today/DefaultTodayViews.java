@@ -20,6 +20,6 @@ public class DefaultTodayViews implements TodayViews {
    }
 
    @Override public void todayView(final Stories stories, final Theme theme, final StorySummariesTemplate storiesTemplate) {
-      new DefaultStoriesView(this).outputTo(stories, theme, storiesTemplate);
+      new SortingStoriesView(this).outputTo(stories, theme, storiesTemplate);
    }
 }
