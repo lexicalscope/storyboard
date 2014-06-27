@@ -24,8 +24,17 @@ public class Stories implements Iterable<Story> {
    public static class StoriesBuilder {
       private final List<Story> stories = new ArrayList<>();
 
-      public StoriesBuilder with(final StoryBuilder story) {
-         stories.add(story.build());
+      public StoriesBuilder with(final StoryBuilder ... storyBuilders) {
+         for (final StoryBuilder storyBuilder : storyBuilders) {
+            stories.add(storyBuilder.build());
+         }
+         return this;
+      }
+
+      public StoriesBuilder with(final Story ... stories) {
+         for (final Story story : stories) {
+            this.stories.add(story);
+         }
          return this;
       }
 
