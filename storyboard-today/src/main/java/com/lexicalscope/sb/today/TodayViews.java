@@ -4,6 +4,6 @@ import com.lexicalscope.sb.data.Stories;
 import com.lexicalscope.sb.data.Story;
 
 public interface TodayViews {
-   StoriesView todayView(Stories stories, Theme theme, TodayTemplate todayTemplate);
-   StorySummaryView storySummaryView(Story story, Theme theme, TodayTemplate todayTemplate);
+   StoriesView todayView(Stories stories, Theme theme, StorySummariesTemplate storiesTemplate);
+   StorySummaryView storySummaryView(Story story, Theme theme, StorySummariesTemplate storiesTemplate);
 }

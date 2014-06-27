@@ -11,9 +11,9 @@ public class DefaultStoriesView implements StoriesView {
       this.views = views;
    }
 
-   @Override public void outputTo(final Stories stories, final Theme theme, final TodayTemplate todayTemplate) {
+   @Override public void outputTo(final Stories stories, final Theme theme, final StorySummariesTemplate storiesTemplate) {
       for (final Story story : stories) {
-         views.storySummaryView(story, theme, todayTemplate);
+         views.storySummaryView(story, theme, storiesTemplate);
       }
    }
 }

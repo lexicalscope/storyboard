@@ -11,9 +11,9 @@ public class HideIrrelevantStories implements StorySummaryView {
       this.delegate = delegate;
    }
 
-   @Override public void outputTo(final Theme theme, final TodayTemplate todayTemplate) {
+   @Override public void outputTo(final Theme theme, final StorySummariesTemplate storiesTemplate) {
       if(story.relevance().greaterEqual(10)) {
-         delegate.outputTo(theme, todayTemplate);
+         delegate.outputTo(theme, storiesTemplate);
       }
    }
 }

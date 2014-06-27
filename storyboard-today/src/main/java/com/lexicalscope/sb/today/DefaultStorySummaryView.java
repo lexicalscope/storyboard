@@ -14,11 +14,11 @@ public class DefaultStorySummaryView implements StorySummaryView {
       this.partialView = partialView;
    }
 
-   @Override public void outputTo(final Theme theme, final TodayTemplate todayTemplate) {
+   @Override public void outputTo(final Theme theme, final StorySummariesTemplate storiesTemplate) {
       logger.debug("viewing story %s", story.id());
 
       final StorySummaryTemplate storyTemplate = theme.storySummaryTemplate();
       partialView.outputTo(theme, storyTemplate);
-      todayTemplate.addStory(storyTemplate);
+      storiesTemplate.addStory(storyTemplate);
    }
 }
