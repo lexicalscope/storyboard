@@ -11,6 +11,7 @@ public class DefaultTodayView implements TodayView {
    }
 
    @Override public StorySummaryView storySummaryView(final Story story) {
-      return new HideIrrelevantStories(story, new DefaultStorySummaryView(logger, story));
+      return new HideIrrelevantStories(story,
+            new DefaultStorySummaryView(logger, story, new DefaultStorySummaryCoreView()));
    }
 }
