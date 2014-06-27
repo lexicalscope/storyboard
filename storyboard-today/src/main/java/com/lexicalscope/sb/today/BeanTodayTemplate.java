@@ -17,14 +17,12 @@ public class BeanTodayTemplate implements TodayTemplate {
    private String userName;
    private final List<BeanStorySummaryTemplate> stories = new ArrayList<>();
 
-   @Override public TodayTemplate userName(final String name) {
+   @Override public void userName(final String name) {
       this.userName = name;
-      return this;
    }
 
-   @Override public TodayTemplate addStory(final StorySummaryTemplate storyTemplate) {
+   @Override public void addStory(final StorySummaryTemplate storyTemplate) {
       stories.add((BeanStorySummaryTemplate) storyTemplate);
-      return this;
    }
 
    protected String userName() {
