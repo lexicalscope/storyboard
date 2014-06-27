@@ -26,6 +26,9 @@ public class ReadOutputWebResponse implements WebResponse {
          story.summary().toString();
          story.relevance().score();
          story.id();
+         story.goldBadge();
+         story.silverBadge();
+         story.bronzeBadge();
       }
    }
 }

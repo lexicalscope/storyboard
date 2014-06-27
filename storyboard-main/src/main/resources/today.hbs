@@ -5,7 +5,14 @@
       Welcome {{userName}}
       <ul>
           {{#stories}}
-             <li id="story-title-{{id}}">{{title}}</li>
+             <li id="story-title-{{id}}">{{title}} 
+                  <span id="story-badge-{{id}}">
+                     {{#noBadge}}(no badge){{/noBadge}}
+                     {{#bronzeBadge}}(bronze badge){{/bronzeBadge}}
+                     {{#silverBadge}}(silver badge){{/silverBadge}}
+                     {{#goldBadge}}(gold badge){{/goldBadge}}
+                  </span>
+             </li>
           {{/stories}}
       </ul>
    </body>

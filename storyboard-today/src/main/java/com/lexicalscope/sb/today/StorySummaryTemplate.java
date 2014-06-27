@@ -11,4 +11,8 @@ public interface StorySummaryTemplate {
    void author(Name author);
    void summary(Summary summary);
    void relevance(Relevance relevance);
+
+   void showGoldBadge();
+   void showSilverBadge();
+   void showBronzeBadge();
 }

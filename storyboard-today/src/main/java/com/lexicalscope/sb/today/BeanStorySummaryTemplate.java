@@ -16,6 +16,9 @@ public class BeanStorySummaryTemplate implements StorySummaryTemplate {
    private Summary summary;
    private Relevance relevance;
    private long id;
+   private boolean goldBadge;
+   private boolean silverBadge;
+   private boolean bronzeBadge;
 
    @Override public void id(final long id) {
       this.id = id;
@@ -55,6 +58,34 @@ public class BeanStorySummaryTemplate implements StorySummaryTemplate {
 
    protected Relevance relevance() {
       return relevance;
+   }
+
+   @Override public void showGoldBadge() {
+      goldBadge = true;
+   }
+
+   @Override public void showSilverBadge() {
+      silverBadge = true;
+   }
+
+   @Override public void showBronzeBadge() {
+      bronzeBadge = true;
+   }
+
+   public boolean goldBadge() {
+      return goldBadge;
+   }
+
+   public boolean silverBadge() {
+      return silverBadge;
+   }
+
+   public boolean bronzeBadge() {
+      return bronzeBadge;
+   }
+
+   public boolean noBadge() {
+      return !(goldBadge || silverBadge || bronzeBadge);
    }
 
    public static Matcher<BeanStorySummaryTemplate> authoredBy(final String name) {
