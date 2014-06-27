@@ -28,19 +28,31 @@ public class TestTodayHandler {
    private UserId userId;
 
    private final StoryBuilder bobsStory = story().author("Bob Builder").title("Build Things").summary("Build All The Things").relevance(10);
-   private final StoryBuilder carolsStory = story().author("Carol Singer").title("Sing Things").summary("Sing All The Things").relevance(3);
+   private final StoryBuilder carolsStory = story().author("Carol Singer").title("Sing Things").summary("Sing All The Things").relevance(10);
    private final StoryBuilder davesStory = story().author("Dave Driver").title("Drive Things").summary("Drive All The Things").relevance(10);
    private final Matcher<BeanTodayTemplate> isBobsStory = showsStoryFrom("Bob Builder", titleIs("Build Things"), summaryIs("Build All The Things"), relevance(10));
-   private final Matcher<BeanTodayTemplate> isCarolsStory = showsStoryFrom("Carol Singer", titleIs("Sing Things"), summaryIs("Sing All The Things"), relevance(3));
+   private final Matcher<BeanTodayTemplate> isCarolsStory = showsStoryFrom("Carol Singer", titleIs("Sing Things"), summaryIs("Sing All The Things"), relevance(10));
    private final Matcher<BeanTodayTemplate> isDavesStory = showsStoryFrom("Dave Driver", titleIs("Drive Things"), summaryIs("Drive All The Things"), relevance(10));
 
-   @Test public void storyAreShownForUser() {
-      final FakeWebResponse response = runTest();
+   @Test public void responseIsOK() {
+      assertThat(runTest(), statusIs(200));
+   }
 
-      final BeanTodayTemplate todayTemplate = (BeanTodayTemplate) response.content();
-      assertThat(response, statusIs(200));
-      assertThat(todayTemplate, showsUser("Alice Acrobat"));
-      assertThat(todayTemplate, allOf(isBobsStory, isCarolsStory, isDavesStory));
+   @Test public void userIsShown() {
+      assertThat((BeanTodayTemplate) runTest().content(),
+                 showsUser("Alice Acrobat"));
+   }
+
+   @Test public void storiesAreShownForUser() {
+      assertThat((BeanTodayTemplate) runTest().content(),
+                 allOf(isBobsStory, isCarolsStory, isDavesStory));
+   }
+
+   @Test public void relevantStoriesAreShownForUser() {
+      carolsStory.relevance(3);
+
+      assertThat((BeanTodayTemplate) runTest().content(),
+                 allOf(isBobsStory, isDavesStory));
    }
 
    private FakeWebResponse runTest() {
