@@ -11,19 +11,15 @@ public class DefaultTodayViews implements TodayViews {
       this.logger = logger;
    }
 
-   @Override public StorySummaryView storySummaryView(final Story story, final Theme theme, final StorySummariesTemplate storiesTemplate) {
-      final HideIrrelevantStories view = new HideIrrelevantStories(story,
+   @Override public void storySummaryView(final Story story, final Theme theme, final StorySummariesTemplate storiesTemplate) {
+      new HideIrrelevantStories(story,
             new DefaultStorySummaryView(logger, story,
                   new CompositeStorySummaryPartialView(
                         new StorySummaryMainView(story),
-                        new StorySummaryBadgeView(story))));
-      view.outputTo(theme, storiesTemplate);
-      return view;
+                        new StorySummaryBadgeView(story)))).outputTo(theme, storiesTemplate);
    }
 
-   @Override public StoriesView todayView(final Stories stories, final Theme theme, final StorySummariesTemplate storiesTemplate) {
-      final StoriesView view = new DefaultStoriesView(this);
-      view.outputTo(stories, theme, storiesTemplate);
-      return view;
+   @Override public void todayView(final Stories stories, final Theme theme, final StorySummariesTemplate storiesTemplate) {
+      new DefaultStoriesView(this).outputTo(stories, theme, storiesTemplate);
    }
 }
