@@ -2,7 +2,7 @@ package com.lexicalscope.sb.today;
 
 import com.lexicalscope.sb.data.Story;
 
-public class StorySummaryBadgeView implements StorySummaryCoreView {
+public class StorySummaryBadgeView implements StorySummaryPartialView {
    private final Story story;
 
    public StorySummaryBadgeView(final Story story) {

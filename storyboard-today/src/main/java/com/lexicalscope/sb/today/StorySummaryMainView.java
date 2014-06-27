@@ -2,10 +2,10 @@ package com.lexicalscope.sb.today;
 
 import com.lexicalscope.sb.data.Story;
 
-public class DefaultStorySummaryCoreView implements StorySummaryCoreView {
+public class StorySummaryMainView implements StorySummaryPartialView {
    private final Story story;
 
-   public DefaultStorySummaryCoreView(final Story story) {
+   public StorySummaryMainView(final Story story) {
       this.story = story;
    }
 
