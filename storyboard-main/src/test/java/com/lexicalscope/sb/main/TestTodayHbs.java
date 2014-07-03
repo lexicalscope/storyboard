@@ -13,8 +13,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import com.lexicalscope.sb.today.StoryHighlightTemplate;
 import com.lexicalscope.sb.today.StorySummaryTemplate;
 import com.lexicalscope.sb.today.TodayTemplate;
+import com.lexicalscope.sb.values.data.Title;
 
 public class TestTodayHbs {
    @Rule public final TemporaryFolder temporary = new TemporaryFolder();
@@ -56,8 +58,20 @@ public class TestTodayHbs {
       assertTextInElement(storyBadge1(), "(no badge)");
    }
 
+   @Test public void highlightsShown() throws IOException {
+      outputHighlight(highlight1());
+
+      assertTextInElement("story-highlight-title-1", "my story");
+   }
+
    private void outputStory(final StorySummaryTemplate storySummaryTemplate) throws IOException, FileNotFoundException, MalformedURLException {
       todayTemplate.addStory(storySummaryTemplate);
+
+      outputTemplate();
+   }
+
+   private void outputHighlight(final StoryHighlightTemplate storyHighlightTemplate) throws IOException, FileNotFoundException, MalformedURLException {
+      todayTemplate.addHighlight(storyHighlightTemplate);
 
       outputTemplate();
    }
@@ -70,6 +84,13 @@ public class TestTodayHbs {
       final StorySummaryTemplate storySummaryTemplate = theme.storySummaryTemplate();
       storySummaryTemplate.id(1);
       return storySummaryTemplate;
+   }
+
+   private StoryHighlightTemplate highlight1() {
+      final StoryHighlightTemplate storyHighlightTemplate = theme.storyHighlightTemplate();
+      storyHighlightTemplate.id(1);
+      storyHighlightTemplate.title(new Title("my story"));
+      return storyHighlightTemplate;
    }
 
    private void outputTemplate() throws IOException, FileNotFoundException, MalformedURLException {

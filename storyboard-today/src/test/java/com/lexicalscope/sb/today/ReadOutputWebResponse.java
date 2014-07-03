@@ -1,5 +1,7 @@
 package com.lexicalscope.sb.today;
 
+import java.util.List;
+
 import com.lexicalscope.sb.http.Template;
 import com.lexicalscope.sb.http.WebResponse;
 
@@ -29,6 +31,11 @@ public class ReadOutputWebResponse implements WebResponse {
          story.goldBadge();
          story.silverBadge();
          story.bronzeBadge();
+      }
+      final List<BeanStoryHighlightTemplate> highlights = output.highlights();
+      for (final BeanStoryHighlightTemplate highlight : highlights) {
+         highlight.title().toString();
+         highlight.id();
       }
    }
 }
