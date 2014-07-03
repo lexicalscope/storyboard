@@ -1,6 +1,5 @@
 package com.lexicalscope.sb.today;
 
-import java.util.Collections;
 import java.util.List;
 
 import com.google.common.collect.Ordering;
@@ -20,8 +19,9 @@ public class SortingStoriesView implements StoriesView {
       final List<Story> sortedList = byRelevance.compound(byId).sortedCopy(stories);
       final Stories sortedStories = new Stories(sortedList);
 
-      Collections.sort(sortedList, byUpvote.compound(byId));
-      final List<Story> topStories = sortedList.subList(0, Math.min(3, sortedList.size()));
+      final List<Story> topStories = byUpvote.compound(byId)
+               .sortedCopy(sortedList)
+               .subList(0, Math.min(3, sortedList.size()));
 
       for (final Story story : sortedStories) {
          views.storySummaryView(story, theme, storiesTemplate);
