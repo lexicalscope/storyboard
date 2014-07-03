@@ -19,6 +19,10 @@ public class DefaultTodayViews implements TodayViews {
                         new StorySummaryBadgeView(story)))).outputTo(theme, storiesTemplate);
    }
 
+   @Override public void storyHighlight(final Story story, final Theme theme, final StorySummariesTemplate storiesTemplate) {
+      new StoryHighlightView(story).outputTo(theme, storiesTemplate);
+   }
+
    @Override public void todayView(final Stories stories, final Theme theme, final StorySummariesTemplate storiesTemplate) {
       new SortingStoriesView(this).outputTo(stories, theme, storiesTemplate);
    }
