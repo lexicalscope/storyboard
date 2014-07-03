@@ -12,6 +12,7 @@ import org.jmock.api.Invocation;
 import org.jmock.auto.Auto;
 import org.jmock.auto.Mock;
 import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -30,7 +31,7 @@ public class TestSortingStoriesView {
 
    @Auto private Sequence outputSequence;
 
-   @Test public void storiesAreSortedByRelevance() {
+   @Test @Ignore public void storiesAreSortedByRelevance() {
       final Story bobsStory = story().id(1).relevance(3).build();
       final Story carolsStory = story().id(2).relevance(7).build();
       final Story davesStory = story().id(3).relevance(1).build();
