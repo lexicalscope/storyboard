@@ -6,8 +6,10 @@ import java.io.PrintWriter;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
+import com.lexicalscope.sb.today.BeanStoryHighlightTemplate;
 import com.lexicalscope.sb.today.BeanStorySummaryTemplate;
 import com.lexicalscope.sb.today.BeanTodayTemplate;
+import com.lexicalscope.sb.today.StoryHighlightTemplate;
 import com.lexicalscope.sb.today.StorySummaryTemplate;
 import com.lexicalscope.sb.today.Theme;
 import com.lexicalscope.sb.today.TodayTemplate;
@@ -26,6 +28,10 @@ public class SimpleMustacheTheme implements Theme {
 
    @Override public StorySummaryTemplate storySummaryTemplate() {
       return new BeanStorySummaryTemplate();
+   }
+
+   @Override public StoryHighlightTemplate storyHighlightTemplate() {
+      return new BeanStoryHighlightTemplate();
    }
 
    public void output(

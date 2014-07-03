@@ -16,6 +16,7 @@ import com.lexicalscope.MatchersAdditional;
 public class BeanTodayTemplate implements TodayTemplate {
    private String userName;
    private final List<BeanStorySummaryTemplate> stories = new ArrayList<>();
+   private final List<BeanStoryHighlightTemplate> highlights = new ArrayList<>();
 
    @Override public void userName(final String name) {
       this.userName = name;
@@ -25,12 +26,20 @@ public class BeanTodayTemplate implements TodayTemplate {
       stories.add((BeanStorySummaryTemplate) storyTemplate);
    }
 
+   @Override public void addHighlight(final StoryHighlightTemplate storyTemplate) {
+      highlights.add((BeanStoryHighlightTemplate) storyTemplate);
+   }
+
    protected String userName() {
       return userName;
    }
 
    public List<BeanStorySummaryTemplate> stories() {
       return stories;
+   }
+
+   public List<BeanStoryHighlightTemplate> highlights() {
+      return highlights;
    }
 
    public static Matcher<? super BeanTodayTemplate> showsUser(final String name) {

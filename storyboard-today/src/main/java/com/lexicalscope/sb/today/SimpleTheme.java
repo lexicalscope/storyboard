@@ -9,4 +9,8 @@ public class SimpleTheme implements Theme {
    @Override public StorySummaryTemplate storySummaryTemplate() {
       return new BeanStorySummaryTemplate();
    }
+
+   @Override public StoryHighlightTemplate storyHighlightTemplate() {
+      return new BeanStoryHighlightTemplate();
+   }
 }
